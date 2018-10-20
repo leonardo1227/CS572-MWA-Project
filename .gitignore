@@ -1,2 +1,4 @@
 
 Documentation/UML.asta.lock
+/
+Applications/RestAPI/node_modules/*
