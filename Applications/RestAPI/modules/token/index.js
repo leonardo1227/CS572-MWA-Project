@@ -9,7 +9,10 @@ tokenGenerator.subscribe(data => {
     JSON.stringify(data.data),
     process.env.TOKEN_PRIVATE_KEY
   );
-  data.data = { token: token };
+  data.data = {
+    token: token,
+    user: { name: data.data.name, email: data.data.email, role: data.data.role }
+  };
   data.next.next(data);
 });
 

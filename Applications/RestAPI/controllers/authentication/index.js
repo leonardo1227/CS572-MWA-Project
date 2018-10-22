@@ -1,7 +1,7 @@
-const crypto = require("crypto");
 const mongoose = require("mongoose");
 const { Subject } = require("rxjs");
 const token = require("../../modules/token");
+const encryptation = require("../../modules/encryptation");
 
 const userRetriever = new Subject();
 const passwordVerifier = new Subject();
@@ -27,12 +27,7 @@ userRetriever.subscribe(data => {
 });
 
 passwordVerifier.subscribe(data => {
-  let cipher = crypto.createCipher(
-    process.env.USER_PASSWORD_CRYPT_ALGO,
-    process.env.USER_PASSWORD_CRYPT_PASSWD
-  );
-  let result = cipher.update(data.request.body.password, "utf8", "hex");
-  result += cipher.final("hex");
+  let result = encryptation.crypter(data.request.body.password);
   if (result == data.data.password) {
     data.next = responser;
     data.responser = responser;
