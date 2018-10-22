@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { TrackChangesDirective } from './directives/track-changes.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TrackChangesDirective
   ],
   imports: [
     BrowserModule,
