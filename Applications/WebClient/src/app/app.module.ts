@@ -13,6 +13,7 @@ import { CreateStaffComponent } from './components/create-staff/create-staff.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainMaterialModule } from './modules/material.module';
+import { ExamComponent } from './components/exam/exam.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MainMaterialModule } from './modules/material.module';
     ProgressVisorComponent,
     AceEditorComponent,
     StaffComponent,
-    CreateStaffComponent
+    CreateStaffComponent,
+    ExamComponent
   ],
   imports: [
     BrowserModule,
