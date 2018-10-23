@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+//import * as ace from '../syntaxhighlighter/src-noconflict/ace.js'
 
 @Component({
   selector: 'app-root',
@@ -15,8 +16,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('initttt ')
-    console.log(this.http)
+    /*
+    console.log(ace)
+    ace.config.set('basePath', './')
+    var editor = ace.edit("editor");
+    console.log(editor)
+    editor.setTheme("/ace/theme/twilight");*/
+    //editor.session.setMode("ace/mode/javascript");
+
     this.http.get('http://localhost:1001/exams/1/1').subscribe(
       data => {
         this.progressArray = data['questions'][0].snapshots;
@@ -24,12 +31,5 @@ export class AppComponent implements OnInit {
       },
       err => console.error(err)
     )
-
-    /*this.progressArray.push({ progress: 'a' })
-    this.progressArray.push({ progress: 'as' })
-    this.progressArray.push({ progress: 'asd' })
-    this.progressArray.push({ progress: 'asde' })
-    this.progressArray.push({ progress: 'asde ' })
-    this.progressArray.push({ progress: 'asde f' })*/
   }
 }

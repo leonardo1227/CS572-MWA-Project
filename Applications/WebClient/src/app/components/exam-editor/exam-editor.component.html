@@ -1,0 +1,9 @@
+<ace-editor #editor
+       [(text)]="text"
+       [mode]="'javascript'"
+       [options]="options"
+       [readOnly]="false"
+       [autoUpdateContent]="true"
+       [durationBeforeCallback]="0"
+       (textChanged)="onChange($event)"
+       style="min-height: 200px; width:100%; overflow: auto;"></ace-editor>
