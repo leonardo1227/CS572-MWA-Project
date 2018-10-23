@@ -1,22 +1,37 @@
-<mat-card class="card">
-  <form [formGroup]='form' (ngSubmit)="submitForm(f)">
+<mat-card class="card center">
+  <h1 class="centerContent">New User</h1>
+
+  <form [formGroup]='form' (ngSubmit)="submitForm()">
     <mat-form-field class="full-width" appearance="standard">
-      <mat-label>Standard form field</mat-label>
-      <input matInput placeholder="Name" type="text" formControlName="name" required>
-      <mat-hint>Hint</mat-hint>
+      <mat-label>Full Name</mat-label>
+      <input matInput placeholder="Full Name" type="text" name="name" formControlName="name" required>
     </mat-form-field>
-    <div>
-      <input matInput placeholder="Role" type="text" name="role" formControlName="role" required>
-    </div>
-    <div>
-      <input matInput placeholder="Email" type="text" name="email" formControlName="email" required>
-    </div>
-    <div>
+
+    <mat-form-field>
+      <mat-select placeholder="Role" formControlName="role">
+        <mat-option value="admin">
+          Admin
+        </mat-option>
+        <mat-option value="staffing">
+          Staffing
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="standard">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" type="email" name="email" formControlName="email" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" appearance="standard">
+      <mat-label>Password</mat-label>
       <input matInput placeholder="Password" type="password" name="password" formControlName="password" required>
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="actived">Active</mat-slide-toggle>
+    <br>
+    <div class="centerContent">
+      <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary">Save</button>
     </div>
-    <div>
-      <mat-slide-toggle>Admin</mat-slide-toggle>
-    </div>
-    <button mat-raised-button type="submit" [disabled]="!form.valid">Save</button>
   </form>
 </mat-card>
