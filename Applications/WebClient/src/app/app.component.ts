@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'WebClient';
+  
   private progressArray: Array<object>
 
   constructor(public http: HttpClient) {
@@ -24,5 +25,9 @@ export class AppComponent implements OnInit {
       },
       err => console.error(err)
     )
+ 
+  }
+  makeRequest(): void{
+  
   }
 }
