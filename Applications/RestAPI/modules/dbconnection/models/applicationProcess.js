@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const snapshotModel = require("../models/snapshot")
+
 const schema = new mongoose.Schema({
   _id: Number,
   date: Date,
@@ -21,7 +23,7 @@ const schema = new mongoose.Schema({
           answer: String,
           startTime: Date,
           endTime: Date,
-          snapshots: [{ _id: Number, progress: String }]
+          snapshots: [snapshotModel]
         }
       ]
     }

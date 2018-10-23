@@ -1,32 +1,42 @@
-import { Directive, HostListener, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Directive, HostListener, ElementRef, OnDestroy, OnInit, Injectable } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
+import { HttpClient } from '@angular/common/http';
 
+@Injectable()
 @Directive({
   selector: '[trackChanges]'
 })
 export class TrackChangesDirective implements OnDestroy, OnInit {
 
   private checkSubscription: Subscription;
+  public snapshots: Array<object>
 
-  public snapshots: Array<string>
-
-
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, public http: HttpClient) {
     this.snapshots = new Array();
   }
 
   @HostListener('input') ngOnChanges() {
     console.log(this.el.nativeElement.value);
-    this.snapshots.push(this.el.nativeElement.value);
+    const currentTime = Date.now();
+    const obj = { snap: this.el.nativeElement.value, time: currentTime, duration: 0 };
+    this.snapshots.push(obj);
   }
 
   autoSave(event) {
     console.log('Firing subscriber ');
     console.log(this.snapshots);
+    console.log(this.snapshots.length);
     if (this.snapshots.length > 0) {
-      //TODO: send to DB
-      this.snapshots.length = 0;
+      this.http.post('http://localhost:1001/exams/progress/1/1/1', this.snapshots).subscribe(
+        result => {
+          console.log('end...');
+          //this.snapshots.length = 0;
+          this.snapshots.splice(0, this.snapshots.length)
+        },
+        error => {
+          console.error(error);
+        });
     }
   }
 
