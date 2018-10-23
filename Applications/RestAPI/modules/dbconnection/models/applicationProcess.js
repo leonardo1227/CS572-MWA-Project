@@ -49,8 +49,8 @@ schema.methods.generateExamId = (applicationProcessId, callbackFunction) => {
     });
 };
 
-schema.methods.createInvitation = (email, callbackFunction) => {
-  schema.methods.generateExamId(email, (err, result) => {
+schema.methods.createInvitation = (proccessApplicationId, callbackFunction) => {
+  schema.methods.generateExamId(proccessApplicationId, (err, result) => {
     let exam = { _id: result.examId, invitationStatus: "Sent" };
     mongoose
       .model("applicationProcess")
@@ -67,6 +67,34 @@ schema.methods.createInvitation = (email, callbackFunction) => {
         }
       );
   });
+};
+
+schema.methods.getExam = (proccessApplicationId, examId, callbackFunction) => {
+  mongoose
+    .model("applicationProcess")
+    .findById(proccessApplicationId, (err, res) => {
+      if (err) {
+        console.error(err);
+      } else {
+        callbackFunction(res.exams.find(e => e._id == examId));
+      }
+    });
+};
+
+schema.methods.updateExam = (proccessApplicationId, exam, callbackFunction) => {
+  mongoose
+    .model("applicationProcess")
+    .updateOne(
+      { _id: proccessApplicationId, "exams._id": exam._id },
+      { $set: { "exams.$": exam } },
+      (err, result) => {
+        if (err) {
+          console.error(err);
+        } else {
+          callbackFunction(result);
+        }
+      }
+    );
 };
 
 module.exports = mongoose.model("applicationProcess", schema);

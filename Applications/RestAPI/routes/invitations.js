@@ -8,4 +8,9 @@ route.post("/send", (request, response) => {
   controller.examObjectCreator.next(data);
 });
 
+route.get("/answer", (request, response) => {
+  let data = { request: request, response: response };
+  controller.invitationHashDecrypter.next(data);
+});
+
 module.exports = route;
