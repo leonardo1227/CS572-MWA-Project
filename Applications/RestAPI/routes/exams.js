@@ -30,8 +30,6 @@ route.post('/progress/:appId/:examId/:questionId', (req, res) => {
         if (err) throw err;
         const question = data1.exams.filter(x => x._id == examId).map(x => x.questions).filter(x => x[0]._id == questionId)[0][0]
 
-        //question.snapshots.splice(0, question.snapshots.length)
-
         if (reset) {
             console.log('resetttt')
             question.snapshots.splice(0, question.snapshots.length)
@@ -52,7 +50,6 @@ route.post('/progress/:appId/:examId/:questionId', (req, res) => {
             }
         }
         data1.save().then(result => {
-            console.log(result)
             res.status(201).json(result);
         })
     })

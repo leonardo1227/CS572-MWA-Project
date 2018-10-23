@@ -16,14 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*
-    console.log(ace)
-    ace.config.set('basePath', './')
-    var editor = ace.edit("editor");
-    console.log(editor)
-    editor.setTheme("/ace/theme/twilight");*/
-    //editor.session.setMode("ace/mode/javascript");
-
+    
     this.http.get('http://localhost:1001/exams/1/1').subscribe(
       data => {
         this.progressArray = data['questions'][0].snapshots;

@@ -1,18 +1,78 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-orange.min.css" />
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<mat-toolbar class="header" color="theme">
+  <mat-toolbar-row>
+    <span class="logo">
+      <a [routerLink]="['']">
+        MWA Project
+      </a>
+    </span>
+    <span class="fill-remaining-space"></span>
+    <span class="user">{{(user | async)?.name}}</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="!(user | async)">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="update-password" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Change password</span>
+      </a>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-  <exam-editor trackChanges></exam-editor>
-  <br>
-  <hr>
-  Visor<br>
-  <progress-visor [snapshots]=progressArray></progress-visor>
-  <br><hr>
-</div>
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenav mode="side" [opened]="(user | async)" class="sidenav" fixedInViewport fixedTopGap="60">
+    <mat-nav-list class='nav-menu'>
+      <span>Exams</span>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/exams']">
+        <mat-icon color="accent">list</mat-icon>
+        Exams
+      </a>
+      <a mat-list-item [routerLink]="['/exams']">
+        <mat-icon color="accent">code</mat-icon>
+        Create exam
+      </a>
+      <div *ngIf="(user | async)?.role === 'ADMIN'">
+        <span>Questions</span>
+        <mat-divider></mat-divider>
+        <a mat-list-item [routerLink]="['/questions']">
+          <mat-icon color="accent">question_answer</mat-icon>
+          Questions
+        </a>
+        <a mat-list-item [routerLink]="['/questions/add']">
+          <mat-icon color="accent">note_add</mat-icon>
+          Add question
+        </a>
+        <span>Users</span>
+        <mat-divider></mat-divider>
+        <a mat-list-item [routerLink]="['/users']">
+          <mat-icon color="accent">supervisor_account</mat-icon>
+          Users
+        </a>
+        <a mat-list-item [routerLink]="['/users/add']">
+          <mat-icon color="accent">person_add</mat-icon>
+          Add user
+        </a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
 
-<router-outlet></router-outlet>
+  <mat-sidenav-content class="content">
+    <!--
+      <exam-editor trackChanges></exam-editor>
+      <br>
+      <hr>
+      Visor<br>
+      <progress-visor [snapshots]=progressArray></progress-visor>
+      <br><hr>-->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-toolbar class="footer">
+  <span>Jey Guru Dev</span>
+</mat-toolbar><!--The content below is only a placeholder and can be replaced.-->

@@ -1,0 +1,22 @@
+<mat-card class="card">
+  <form [formGroup]='form' (ngSubmit)="submitForm(f)">
+    <mat-form-field class="full-width" appearance="standard">
+      <mat-label>Standard form field</mat-label>
+      <input matInput placeholder="Name" type="text" formControlName="name" required>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+    <div>
+      <input matInput placeholder="Role" type="text" name="role" formControlName="role" required>
+    </div>
+    <div>
+      <input matInput placeholder="Email" type="text" name="email" formControlName="email" required>
+    </div>
+    <div>
+      <input matInput placeholder="Password" type="password" name="password" formControlName="password" required>
+    </div>
+    <div>
+      <mat-slide-toggle>Admin</mat-slide-toggle>
+    </div>
+    <button mat-raised-button type="submit" [disabled]="!form.valid">Save</button>
+  </form>
+</mat-card>

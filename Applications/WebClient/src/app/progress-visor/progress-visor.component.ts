@@ -20,8 +20,6 @@ export class ProgressVisorComponent implements OnInit {
   play() {
     if (this.snapshots.length == 0)
       return
-    
-      this.counterFrame = 0;
 
     this.startSequence();
   }
@@ -48,12 +46,14 @@ export class ProgressVisorComponent implements OnInit {
 
   forward() {
     if (this.counterFrame + 1 > this.snapshots.length - 1) return;
+    clearTimeout(this.currentTimer);
     this.counterFrame++;
     this.updateScreen()
   }
 
   backward() {
     if (this.counterFrame - 1 < 0) return;
+    clearTimeout(this.currentTimer);
     this.counterFrame--;
     this.updateScreen()
   }
