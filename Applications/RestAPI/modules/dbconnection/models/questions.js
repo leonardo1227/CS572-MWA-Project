@@ -4,4 +4,9 @@ const schema = new mongoose.Schema({
   problemStatement: String,
   actived: Boolean
 });
+
+schema.methods.findOnlyActived = (callbackFunction)=>{
+  mongoose.model('question').find().where('actived').equals(true).exec(callbackFunction); 
+}
+
 module.exports = mongoose.model("question", schema);
