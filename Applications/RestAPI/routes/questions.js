@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require("cors");
 const route = express.Router();
 const questionCollection = require('mongoose').model('question');
 const questionDB = require('../modules/dbconnection/models').question();
 route.use(express.json())
+route.use(cors());
 
 route.get('/', (request,response)=>{
     questionCollection.count().exec(function(err,count){
