@@ -5,7 +5,7 @@ const controller = require("../controllers/invitations");
 
 route.post("/send", (request, response) => {
   let data = { request: request, response: response };
-  controller.applicationProcessRetriver.next(data);
+  controller.examObjectCreator.next(data);
 });
 
 module.exports = route;
