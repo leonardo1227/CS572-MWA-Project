@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TrackChangesDirective } from './directives/track-changes.directive';
-import { ProgressVisorComponent } from './progress-visor/progress-visor.component';
+import { ProgressVisorComponent } from './components/progress-visor/progress-visor.component';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { AceEditorComponent } from './components/exam-editor/exam-editor.component';
 import { StaffComponent } from './components/staff/staff.component';
