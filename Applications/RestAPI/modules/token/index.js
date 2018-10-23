@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const { Subject } = require("rxjs");
 
 const tokenGenerator = new Subject();
-const tokenVerifier = new Subject();
 const passwordlessTokenGenerator = new Subject();
 
 tokenGenerator.subscribe(data => {
@@ -31,21 +30,32 @@ passwordlessTokenGenerator.subscribe(data => {
   data.next.next(data);
 });
 
-tokenVerifier.subscribe(data => {
-  jwt.verify(
-    data.request.token,
-    process.env.TOKEN_PRIVATE_KEY,
-    (err, result) => {
-      if (err) {
-        data.data = { error: "Invalid Token" };
-        data.responser.next(data);
-      } else {
-        data.next.next(data);
-      }
+const protectedResource = (request, response, next) => {
+  ensureToken(request, response, next);
+};
+
+const ensureToken = (request, response, next) => {
+  let bearerHeader = request.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    request.token = bearerHeader.split(" ")[1];
+    verifyToken(request, response, next); //next
+  } else {
+    response.json({ token: "no token" });
+  }
+};
+
+const verifyToken = (request, response, next) => {
+  jwt.verify(request.token, process.env.TOKEN_PRIVATE_KEY, (err, result) => {
+    if (err) {
+      response.json({ token: "invalid" });
+    } else {
+      next();
     }
-  );
-});
+  });
+};
 
 module.exports.tokenGenerator = tokenGenerator;
-module.exports.tokenVerifier = tokenVerifier;
 module.exports.passwordlessTokenGenerator = passwordlessTokenGenerator;
+module.exports.ensureToken = ensureToken;
+module.exports.protectedResource = protectedResource;
+module.exports.verifyToken = verifyToken;
