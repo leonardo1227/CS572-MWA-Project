@@ -1,7 +1,7 @@
-const nodemailer = require("nodemailer");
 const applicationProcessDB = require("../../modules/dbconnection/models").applicationProcess();
 const { Subject } = require("rxjs");
 const encryptation = require("../../modules/encryptation");
+const email = require("../../modules/email");
 
 const invitationHashCreator = new Subject();
 const examObjectCreator = new Subject();
@@ -35,35 +35,28 @@ invitationHashCreator.subscribe(data => {
 });
 
 emailSender.subscribe(data => {
-  nodemailer.createTestAccount((err, account) => {
-    let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: { user: account.user, pass: account.pass }
-    });
+  let htmlbody = `<h3>This is the invitation to take the exam, click in the following link:</h3>
+              <a href="http://localhost:1001/invitations/answer?cod=${
+                data.invitationInfo.hash
+              }">Take the exam</a>`;
 
-    let mailOptions = {
-      // from: '"AEL CSES" <register@aelcses.com>',
-      from: data.invitationInfo.email,
-      to: data.invitationInfo.email,
-      subject: "Exam Token URL Request",
-      text: "localhost:1001/invitations/answer?cod=" + data.invitationInfo.hash,
-      html: "<b>TESTE</b>"
-    };
-
-    transporter.sendMail(mailOptions, (err, info) => {
-      console.log(err);
-      console.log(info);
-      data.data = { sent: "ok" };
+  email.sendEmail(
+    data.invitationInfo.email,
+    "Exam Token URL Request",
+    htmlbody,
+    (err, info) => {
+      if (err) {
+        data.data = { sent: "error" };
+      } else {
+        data.data = { sent: "sucess" };
+      }
       responser.next(data);
-    });
-  });
+    }
+  );
 });
 
 responser.subscribe(data => {
   data.response.json(data.data);
 });
 
-// module.exports.invitationCreator = invitationCreator;
 module.exports.examObjectCreator = examObjectCreator;
