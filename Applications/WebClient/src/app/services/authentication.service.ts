@@ -16,11 +16,5 @@ export class AuthenticationService {
         callback(result);
       }
     );
-    // this.http
-    //   .post("http://localhost:1001/authentication", {
-    //     email: email,
-    //     password: password
-    //   })
-    //   .subscribe(result => callback(result), err => callback(err));
   }
 }

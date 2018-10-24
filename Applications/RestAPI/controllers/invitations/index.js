@@ -1,4 +1,5 @@
 const applicationProcessDB = require("../../modules/dbconnection/models").applicationProcess();
+const questionDB = require("../../modules/dbconnection/models").question();
 const { Subject } = require("rxjs");
 const encryptation = require("../../modules/encryptation");
 const email = require("../../modules/email");
@@ -10,6 +11,7 @@ const emailSender = new Subject();
 
 const invitationHashDecrypter = new Subject();
 const invitationVerifier = new Subject();
+const questionsGenerator = new Subject();
 const invitationStatusChanger = new Subject();
 
 const responser = new Subject();
@@ -80,13 +82,21 @@ invitationVerifier.subscribe(data => {
     result => {
       if (result.invitationStatus == "Sent") {
         data.exam = result;
-        invitationStatusChanger.next(data);
+        // invitationStatusChanger.next(data);
+        questionsGenerator.next(data);
       } else {
         data.data = { error: "Invitation no longer valid!" };
         responser.next(data);
       }
     }
   );
+});
+
+questionsGenerator.subscribe(data => {
+  questionDB.getQuestionsForExam(3, (err, result) => {
+    data.exam.questions = result;
+    invitationStatusChanger.next(data);
+  });
 });
 
 invitationStatusChanger.subscribe(data => {
