@@ -13,9 +13,7 @@ route.get('/:appId/:id', (req, res) => {
     const examId = req.params.id;
     mongoose.model('applicationProcess').findById(appId, (err, data1) => {
         if (err) throw err;
-        console.log(examId)
         const exam = data1.exams.filter(x => x._id == examId)[0]
-        console.log(exam)
         res.status(201).json(exam);
     });
 });
@@ -31,7 +29,6 @@ route.post('/progress/:appId/:examId/:questionId', (req, res) => {
         const question = data1.exams.filter(x => x._id == examId).map(x => x.questions).filter(x => x[0]._id == questionId)[0][0]
 
         if (reset) {
-            console.log('resetttt')
             question.snapshots.splice(0, question.snapshots.length)
         } else {
             let firstIndex = 0;
