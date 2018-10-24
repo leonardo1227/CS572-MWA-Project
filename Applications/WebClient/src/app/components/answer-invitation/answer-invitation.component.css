@@ -1,0 +1,10 @@
+div {
+  text-align: center;
+  width: 20%;
+  height: 200px;
+  margin: auto;
+}
+
+.errorDiv {
+  color: red;
+}

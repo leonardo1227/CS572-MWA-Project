@@ -1,6 +1,3 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { TrackChangesDirective } from "./directives/track-changes.directive";
@@ -13,7 +10,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MainMaterialModule } from "./modules/material.module";
 import { ExamComponent } from "./components/exam/exam.component";
 import { QuestionComponent } from "./components/question/question.component";
+import { QuestionEditorComponent } from "./components/question-editor/question-editor.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppRoutingModule } from "./app-routing.module";
 import { LoginComponent } from "./components/login/login.component";
+import { AnswerInvitationComponent } from "./components/answer-invitation/answer-invitation.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { UsersComponent } from "./components/users/users.component";
 import { ErrorComponent } from './components/error/error.component';
@@ -29,10 +31,12 @@ import { MainComponentService } from "./services/mainComponentCommunication";
     StaffComponent,
     CreateUserComponent,
     ExamComponent,
-    UsersComponent,
     QuestionComponent,
+    ErrorComponent,
+    QuestionEditorComponent,
+    UsersComponent,
     LoginComponent,
-    ErrorComponent
+    AnswerInvitationComponent
   ],
   imports: [
     BrowserModule,
