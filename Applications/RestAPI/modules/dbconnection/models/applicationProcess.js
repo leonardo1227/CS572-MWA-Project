@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const snapshotModel = require("../models/snapshot")
+const snapshotModel = require("../models/snapshot");
 
 const schema = new mongoose.Schema({
   _id: Number,
