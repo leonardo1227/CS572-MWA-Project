@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainMaterialModule } from './modules/material.module';
 import { ExamComponent } from './components/exam/exam.component';
+import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ExamComponent } from './components/exam/exam.component';
     AceEditorComponent,
     StaffComponent,
     CreateStaffComponent,
-    ExamComponent
+    ExamComponent,
+    QuestionComponent
   ],
   imports: [
     BrowserModule,
