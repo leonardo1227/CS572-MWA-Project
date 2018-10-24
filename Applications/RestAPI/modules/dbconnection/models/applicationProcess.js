@@ -99,4 +99,11 @@ schema.methods.updateExam = (proccessApplicationId, exam, callbackFunction) => {
     );
 };
 
+schema.methods.getApplicationProcessesToInvite = callbackFunction => {
+  let query = {};
+  mongoose.model("applicationProcess").find(query, (err, result) => {
+    callbackFunction(err, result);
+  });
+};
+
 module.exports = mongoose.model("applicationProcess", schema);

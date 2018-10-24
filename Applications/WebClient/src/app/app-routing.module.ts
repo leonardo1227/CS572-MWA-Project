@@ -1,3 +1,5 @@
+import { StaffGuard } from "./guards/staff.guard";
+import { SendInvitationComponent } from "./components/send-invitation/send-invitation.component";
 import { AnswerInvitationComponent } from "./components/answer-invitation/answer-invitation.component";
 import { AppComponent } from "./app.component";
 import { NgModule } from "@angular/core";
@@ -15,20 +17,33 @@ import { ExamGuard } from "./guards/exam.guard";
 
 const routes: Routes = [
   { path: "staff", component: StaffComponent, canActivate: [AdminGuard] },
-  { path: 'createUser', component: CreateUserComponent, canActivate: [AdminGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
-  { path: "exam", component: ExamComponent, canActivate: [ExamGuard]},
-  { path: "createQuestion", component: QuestionComponent, canActivate: [AdminGuard]},
+  {
+    path: "createUser",
+    component: CreateUserComponent,
+    canActivate: [AdminGuard]
+  },
+  { path: "users", component: UsersComponent, canActivate: [AdminGuard] },
+  { path: "exam", component: ExamComponent, canActivate: [ExamGuard] },
+  {
+    path: "createQuestion",
+    component: QuestionComponent,
+    canActivate: [AdminGuard]
+  },
   { path: "login", component: LoginComponent },
   { path: "editQuestion", component: QuestionEditorComponent },
   { path: "answerInvitation", component: AnswerInvitationComponent },
-  { path: "", component: AppComponent, canActivate: [AdminGuard]},
+  {
+    path: "sendInvitation",
+    component: SendInvitationComponent,
+    canActivate: [StaffGuard]
+  },
+  { path: "", component: AppComponent, canActivate: [AdminGuard] },
   { path: "error", component: ErrorComponent },
-  { path: "**", redirectTo: 'error' }
+  { path: "**", redirectTo: "error" }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
