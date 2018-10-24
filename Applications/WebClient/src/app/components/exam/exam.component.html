@@ -1,12 +1,11 @@
-<p>{{question1}}</p>
-<exam-editor trackChanges></exam-editor>
-<p>{{question2}}</p>
-<exam-editor trackChanges></exam-editor>
-<p>{{question3}}</p>
-<exam-editor trackChanges></exam-editor>
+<div *ngFor="let item of questions">
+    <p>{{item.problemStatement}}</p>
+    <exam-editor trackChanges></exam-editor>
+</div>
+<!-- 
 <br>
 <hr>
 Visor<br>
 <progress-visor [snapshots]=progressArray></progress-visor>
 <br>
-<hr>
+<hr> -->

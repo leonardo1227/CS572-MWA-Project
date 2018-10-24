@@ -11,12 +11,13 @@ import { CreateUserComponent } from "./components/create-user/create-user.compon
 import { UsersComponent } from "./components/users/users.component";
 import { ErrorComponent } from "./components/error/error.component";
 import { AdminGuard } from "./guards/admin.guard";
+import { ExamGuard } from "./guards/exam.guard";
 
 const routes: Routes = [
   { path: "staff", component: StaffComponent, canActivate: [AdminGuard] },
   { path: 'createUser', component: CreateUserComponent, canActivate: [AdminGuard] },
   { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
-  { path: "exam", component: ExamComponent},
+  { path: "exam", component: ExamComponent, canActivate: [ExamGuard]},
   { path: "createQuestion", component: QuestionComponent, canActivate: [AdminGuard]},
   { path: "login", component: LoginComponent },
   { path: "editQuestion", component: QuestionEditorComponent },

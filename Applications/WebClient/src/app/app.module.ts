@@ -21,6 +21,7 @@ import { UsersComponent } from "./components/users/users.component";
 import { ErrorComponent } from './components/error/error.component';
 import { AdminGuard } from "./guards/admin.guard";
 import { MainComponentService } from "./services/mainComponentCommunication";
+import { ExamGuard } from "./guards/exam.guard";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { MainComponentService } from "./services/mainComponentCommunication";
     BrowserAnimationsModule,
     MainMaterialModule
   ],
-  providers: [AdminGuard, MainComponentService],
+  providers: [AdminGuard, ExamGuard, MainComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
