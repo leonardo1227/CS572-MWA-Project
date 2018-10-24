@@ -1,3 +1,4 @@
+import { AnswerInvitationComponent } from "./components/answer-invitation/answer-invitation.component";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { NgModule } from "@angular/core";
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: "exam", component: ExamComponent },
   { path: "createQuestion", component: QuestionComponent },
   { path: "login", component: LoginComponent },
-  { path: "home", component: AppComponent }
+  { path: "home", component: AppComponent },
+  { path: "answerInvitation", component: AnswerInvitationComponent }
 ];
 
 @NgModule({

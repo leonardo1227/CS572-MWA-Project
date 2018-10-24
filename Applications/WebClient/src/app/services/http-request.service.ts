@@ -7,19 +7,16 @@ import { Injectable } from "@angular/core";
 export class HttpRequestService {
   constructor(private http: HttpClient) {}
 
-  // get(url: string, headers: HttpHeaders) {
-  //   if (headers) {
-  //     return this.http.get(url,headers);
-  //   } else {
-  //     return this.http.get(url);
-  //   }
-  // }
+  getRequest(url, callback) {
+    const headers = new HttpHeaders();
 
-  // post(url: string, body: Object, headers:HttpHeaders) {
-  //   if(headers){
-  //     return this.http.options(url,headers,)
-  //   }else{
-  //     return this.http.options(url);
-  //   }
-  // }
+    const bearerToken = sessionStorage.getItem("token");
+    if (bearerToken) {
+      headers.set("Authorization", `Bearer ${bearerToken}`);
+    }
+
+    this.http
+      .get(url, { headers })
+      .subscribe(result => callback(result), err => callback(err));
+  }
 }

@@ -16,6 +16,7 @@ import { MainMaterialModule } from "./modules/material.module";
 import { ExamComponent } from "./components/exam/exam.component";
 import { QuestionComponent } from "./components/question/question.component";
 import { LoginComponent } from "./components/login/login.component";
+import { AnswerInvitationComponent } from './components/answer-invitation/answer-invitation.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoginComponent } from "./components/login/login.component";
     CreateStaffComponent,
     ExamComponent,
     QuestionComponent,
-    LoginComponent
+    LoginComponent,
+    AnswerInvitationComponent
   ],
   imports: [
     BrowserModule,

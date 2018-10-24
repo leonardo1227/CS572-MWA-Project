@@ -43,8 +43,8 @@ invitationHashCreator.subscribe(data => {
 emailSender.subscribe(data => {
   let htmlbody = `<h3>This is the invitation to take the exam, click in the following link:</h3>
               <a href="http://${process.env.SERVER_IP}:${
-    process.env.SERVER_PORT
-  }/invitations/answer?cod=${data.invitationInfo.hash}">Take the exam</a>`;
+    process.env.CLIENT_PORT
+  }/answerInvitation?cod=${data.invitationInfo.hash}">Take the exam</a>`;
 
   email.sendEmail(
     data.invitationInfo.email,
@@ -82,7 +82,7 @@ invitationVerifier.subscribe(data => {
         data.exam = result;
         invitationStatusChanger.next(data);
       } else {
-        data.data = { invitation: "invalid" };
+        data.data = { error: "Invitation no longer valid!" };
         responser.next(data);
       }
     }

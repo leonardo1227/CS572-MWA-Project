@@ -1,0 +1,6 @@
+<div>
+  <mat-spinner *ngIf="spinning"></mat-spinner>
+</div>
+<div class="errorDiv" *ngIf="!spinning">
+  {{msg}}
+</div>
