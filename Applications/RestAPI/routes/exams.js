@@ -26,16 +26,15 @@ route.post('/progress/:appId/:examId/:questionId', (req, res) => {
     const progress = req.body;
     mongoose.model('applicationProcess').findById(appId, (err, data1) => {
         if (err) throw err;
-        const question = data1.exams.filter(x => x._id == examId).map(x => x.questions).filter(x => x[0]._id == questionId)[0][0]
+        const question = data1.exams.filter(x => x._id == examId)[0].questions.filter(x => x._id == questionId)[0]
 
         if (reset) {
             question.snapshots.splice(0, question.snapshots.length)
         } else {
             let firstIndex = 0;
-            if (question.snapshots.length > 0) {
+            if (question.snapshots && question.snapshots.length > 0) {
                 firstIndex = question.snapshots.length - 1;
             }
-
             question.snapshots.push(...progress);
 
             for (let i = firstIndex + 1; i < question.snapshots.length; i++) {

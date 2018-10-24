@@ -16,6 +16,10 @@ export class AceEditorComponent implements AfterViewInit {
   ngOnInit(): void {
   }
 
+  resetEvent(e:number) {
+    console.log('asdasdassssssssssssssssssssssssssssssss')
+  }
+
   ngAfterViewInit() {
     this.editor.getEditor().setOptions({
       enableBasicAutocompletion: true

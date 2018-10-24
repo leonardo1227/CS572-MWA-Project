@@ -10,10 +10,10 @@ import { HttpClient } from '@angular/common/http';
 export class TrackChangesDirective implements OnDestroy, OnInit {
 
   private checkSubscription: Subscription;
-  public snapshots: Array<object>
-  @Input() appId:string
-  @Input() examId:string
-  @Input() questionId:string
+  snapshots: Array<object>
+  @Input() appId: string
+  @Input() examId: string
+  @Input() questionId: string
 
   constructor(private el: ElementRef, public http: HttpClient) {
     this.snapshots = new Array();
@@ -45,9 +45,6 @@ export class TrackChangesDirective implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.checkSubscription = fromEvent(this.el.nativeElement, 'input').pipe(debounceTime(2000)).subscribe(e => this.autoSave())
-    console.log('appId' + this.appId)
-    console.log('examId' + this.examId)
-    console.log('questionId' + this.questionId)
   }
 
   ngOnDestroy(): void {

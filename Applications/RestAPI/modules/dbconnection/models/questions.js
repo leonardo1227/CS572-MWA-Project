@@ -57,4 +57,12 @@ schema.methods.generateId = callbackFunction => {
   });
 };
 
+schema.methods.changeStatus = (id, value, callbackFunction) => {
+  mongoose.model("question").updateOne({ _id: id }, { $set: { actived: value } }, (err) => {
+    if (err) throw err;
+
+    callbackFunction({ value: value })
+  })
+}
+
 module.exports = mongoose.model("question", schema);

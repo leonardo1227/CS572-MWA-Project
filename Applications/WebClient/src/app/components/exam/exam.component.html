@@ -1,9 +1,9 @@
-<div *ngFor="let item of questions">
-    <p>{{item.problemStatement}}</p>
-    <exam-editor trackChanges [appId]="appId" [examId]="examId" [questionId]="item._id"></exam-editor>
+<div>
+    <p>{{question.problemStatement}}</p>
+    <exam-editor trackChanges [appId]="appId" [examId]="examId" [questionId]="question._id" #editor></exam-editor>
 </div>
 <div class="centerContent">
-    <button mat-raised-button type="button" (click)="submitExam()" color="primary">Submit Exam</button>
+    <button mat-raised-button type="button" (click)="submitQuestion(editor)" color="primary">Next</button>
 </div>
 <!-- 
 <br>

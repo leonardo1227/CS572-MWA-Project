@@ -12,6 +12,7 @@ import { UsersComponent } from "./components/users/users.component";
 import { ErrorComponent } from "./components/error/error.component";
 import { AdminGuard } from "./guards/admin.guard";
 import { ExamGuard } from "./guards/exam.guard";
+import { QuestionsComponent } from "./components/questions/questions.component";
 
 const routes: Routes = [
   { path: "staff", component: StaffComponent, canActivate: [AdminGuard] },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
   { path: "exam", component: ExamComponent, canActivate: [ExamGuard]},
   { path: "createQuestion", component: QuestionComponent, canActivate: [AdminGuard]},
+  { path: "questions", component: QuestionsComponent, canActivate: [AdminGuard]},
   { path: "login", component: LoginComponent },
   { path: "editQuestion", component: QuestionEditorComponent },
   { path: "answerInvitation", component: AnswerInvitationComponent },

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exam',
@@ -12,7 +13,12 @@ export class ExamComponent implements OnInit {
   questions: object[];
   appId: string;
   examId: string;
-  constructor(public http: HttpClient) { }
+  currentQuestionIndex: number = 0;
+  question: object = {};
+  editor:any;
+
+  constructor(public http: HttpClient, private router: Router) { 
+  }
 
   ngOnInit() {
     this.loadCredentials();
@@ -20,9 +26,9 @@ export class ExamComponent implements OnInit {
     this.appId = this.user['appId']
     this.examId = this.user['examId']
     this.http.get('http://localhost:1001/exams/' + this.appId + '/' + this.examId).subscribe(data => {
-      console.log(data)
       if (data['questions']) {
         this.questions = data['questions'];
+        this.loadQuestion();
       }
     });
   }
@@ -36,8 +42,22 @@ export class ExamComponent implements OnInit {
     }
   }
 
-  submitExam() {
-
+  submitQuestion(editor) {
+    if (this.currentQuestionIndex + 1 == this.questions.length) {
+      this.logout();
+      return;
+    }
+    this.currentQuestionIndex++;
+    this.loadQuestion();
+    editor.text = '';
+  }
+  logout() {
+    this.user = {}
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
 
+  loadQuestion() {
+    this.question = this.questions[this.currentQuestionIndex];
+  }
 }

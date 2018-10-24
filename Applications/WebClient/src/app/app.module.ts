@@ -22,6 +22,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { AdminGuard } from "./guards/admin.guard";
 import { MainComponentService } from "./services/mainComponentCommunication";
 import { ExamGuard } from "./guards/exam.guard";
+import { QuestionsComponent } from './components/questions/questions.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ExamGuard } from "./guards/exam.guard";
     QuestionEditorComponent,
     UsersComponent,
     LoginComponent,
-    AnswerInvitationComponent
+    AnswerInvitationComponent,
+    QuestionsComponent
   ],
   imports: [
     BrowserModule,

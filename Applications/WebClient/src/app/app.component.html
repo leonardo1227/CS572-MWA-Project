@@ -24,14 +24,14 @@
     <mat-nav-list class='nav-menu'>
       <span>Exams</span>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="['/exam']">
+      <a mat-list-item [routerLink]="['']">
         <mat-icon color="accent">list</mat-icon>
         Applications
       </a>
       <div *ngIf="(user)?.role === 'admin'">
         <span>Questions</span>
         <mat-divider></mat-divider>
-        <a mat-list-item [routerLink]="['/questions']">
+        <a mat-list-item [routerLink]="['questions']">
           <mat-icon color="accent">question_answer</mat-icon>
           Questions
         </a>
@@ -56,9 +56,6 @@
   <mat-sidenav-content class="content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
+  
 </mat-sidenav-container>
-
-<mat-toolbar class="footer">
-  <span>Jey Guru Dev</span>
-</mat-toolbar>
 <!--The content below is only a placeholder and can be replaced.-->

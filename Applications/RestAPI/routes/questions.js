@@ -7,9 +7,11 @@ route.use(express.json())
 route.use(cors());
 
 route.get('/', (request, response) => {
-    questionCollection.count().exec(function (err, count) {
+    questionCollection.find({}, (err, result) => {
+        if (err) throw err;
 
-    });
+        response.json(result)
+    })
 });
 
 route.get('/active', (request, response) => {
@@ -34,5 +36,13 @@ route.put('/:id/:actived', (request, response) => {
     questionCollection.findByIdAndUpdate(id, { "actived": isActive });
     response.send(questionId + isActive);
 })
+
+route.patch('/', (req, res) => {
+    const userId = req.body.id;
+    const value = req.body.value;
+    questionDB.changeStatus(userId, value, result => {
+        res.json(result)
+    })
+});
 
 module.exports = route;
