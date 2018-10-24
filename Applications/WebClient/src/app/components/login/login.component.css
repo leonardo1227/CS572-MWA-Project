@@ -1,0 +1,10 @@
+.login-box {
+  text-align: center;
+  width: 20%;
+  margin: auto;
+  padding: auto;
+}
+
+.errorDiv {
+  color: red;
+}

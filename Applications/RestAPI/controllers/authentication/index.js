@@ -16,7 +16,7 @@ userRetriever.subscribe(data => {
         responser.next(data);
       } else {
         if (result == null || !result.actived) {
-          data.data = { error: "Invalid User" };
+          data.data = { error: "Invalid credentials" };
           responser.next(data);
         } else {
           data.data = result;
@@ -33,7 +33,7 @@ passwordVerifier.subscribe(data => {
     data.responser = responser;
     token.tokenGenerator.next(data);
   } else {
-    data.data = { error: "Invalid User" };
+    data.data = { error: "Invalid credentials" };
     responser.next(data);
   }
 });
