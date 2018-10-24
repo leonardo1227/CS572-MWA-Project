@@ -7,18 +7,32 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-  question1 : String;
-  question2 : String;
-  question3 : String;
+  user = {}
+
+  questions: object[];
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:1001/questions').subscribe(data => {
-      console.log(JSON.stringify(data));
-       this.question1 = data[0].problemStatement;
-       this.question2 = data[1].problemStatement;
-       this.question3 = data[2].problemStatement;
+    this.loadCredentials();
+
+    const appId = this.user['appId']
+    const examId = this.user['examId']
+    console.log(this.user)
+    this.http.get('http://localhost:1001/exams/' + appId + '/' + 1).subscribe(data => {
+      console.log(data)
+      if (data['questions']) {
+        this.questions = data['questions'];
+      }
     });
+  }
+
+  loadCredentials() {
+    this.user = {};
+    const email = sessionStorage.getItem('email')
+    if (email) {
+      this.user['examId'] = sessionStorage.getItem('examId')
+      this.user['appId'] = sessionStorage.getItem('applicationProcessId')
+    }
   }
 
 }

@@ -36,4 +36,25 @@ schema.methods.getQuestionsForExam = (questionsNumber, callbackFunction) => {
     });
 };
 
+schema.methods.insertQuestion = (question, status, callbackFunction) => {
+  schema.methods.generateId((err, id) => {
+    mongoose
+      .model("question")
+      .insertMany(
+        { _id: id, problemStatement: question, actived: status },
+        (err, res) => {
+          if (err) throw err;
+
+          callbackFunction(res);
+        }
+      );
+  });
+};
+
+schema.methods.generateId = callbackFunction => {
+  mongoose.model("question").count((err, count) => {
+    callbackFunction(err, count + 1);
+  });
+};
+
 module.exports = mongoose.model("question", schema);

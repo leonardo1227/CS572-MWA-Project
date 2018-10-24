@@ -5,7 +5,6 @@ import { ProgressVisorComponent } from "./components/progress-visor/progress-vis
 import { AceEditorModule } from "ng2-ace-editor";
 import { AceEditorComponent } from "./components/exam-editor/exam-editor.component";
 import { StaffComponent } from "./components/staff/staff.component";
-import { CreateStaffComponent } from "./components/create-staff/create-staff.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MainMaterialModule } from "./modules/material.module";
@@ -19,6 +18,10 @@ import { LoginComponent } from "./components/login/login.component";
 import { AnswerInvitationComponent } from "./components/answer-invitation/answer-invitation.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { UsersComponent } from "./components/users/users.component";
+import { ErrorComponent } from './components/error/error.component';
+import { AdminGuard } from "./guards/admin.guard";
+import { MainComponentService } from "./services/mainComponentCommunication";
+import { ExamGuard } from "./guards/exam.guard";
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { UsersComponent } from "./components/users/users.component";
     CreateUserComponent,
     ExamComponent,
     QuestionComponent,
+    ErrorComponent,
     QuestionEditorComponent,
     UsersComponent,
     LoginComponent,
@@ -45,7 +49,7 @@ import { UsersComponent } from "./components/users/users.component";
     BrowserAnimationsModule,
     MainMaterialModule
   ],
-  providers: [],
+  providers: [AdminGuard, ExamGuard, MainComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

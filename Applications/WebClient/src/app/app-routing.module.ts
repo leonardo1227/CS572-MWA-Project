@@ -9,21 +9,26 @@ import { QuestionEditorComponent } from "./components/question-editor/question-e
 import { LoginComponent } from "./components/login/login.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { UsersComponent } from "./components/users/users.component";
+import { ErrorComponent } from "./components/error/error.component";
+import { AdminGuard } from "./guards/admin.guard";
+import { ExamGuard } from "./guards/exam.guard";
 
 const routes: Routes = [
-  { path: "staff", component: StaffComponent },
-  { path: "exam", component: ExamComponent },
-  { path: "createQuestion", component: QuestionComponent },
-  { path: "editQuestion", component: QuestionEditorComponent },
-  { path: "createUser", component: CreateUserComponent },
-  { path: "users", component: UsersComponent },
+  { path: "staff", component: StaffComponent, canActivate: [AdminGuard] },
+  { path: 'createUser', component: CreateUserComponent, canActivate: [AdminGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
+  { path: "exam", component: ExamComponent, canActivate: [ExamGuard]},
+  { path: "createQuestion", component: QuestionComponent, canActivate: [AdminGuard]},
   { path: "login", component: LoginComponent },
+  { path: "editQuestion", component: QuestionEditorComponent },
   { path: "answerInvitation", component: AnswerInvitationComponent },
-  { path: "home", component: AppComponent }
+  { path: "", component: AppComponent, canActivate: [AdminGuard]},
+  { path: "error", component: ErrorComponent },
+  { path: "**", redirectTo: 'error' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

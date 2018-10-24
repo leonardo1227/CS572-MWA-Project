@@ -6,45 +6,32 @@ const questionDB = require('../modules/dbconnection/models').question();
 route.use(express.json())
 route.use(cors());
 
-route.get('/', (request,response)=>{
-    questionCollection.count().exec(function(err,count){
-        //get 3 random entry
-        var doc = questionCollection.aggregate(
-            [ { $sample: { size: 3 } } ]
-         ).then(result=>
-            { for(let o of result){
-                console.log("result : " + o.problemStatement)
-            }
-            response.json(result);
-        })
-        });
+route.get('/', (request, response) => {
+    questionCollection.count().exec(function (err, count) {
+
+    });
 });
 
-route.get('/active',(request,response) =>{
-    questionCollection.find({"actived": true},(err,docs)=>{
-        console.log(docs);
-        response.send(docs);
+route.get('/active', (request, response) => {
+    questionCollection.find({ "actived": true }, (err, docs) => {
+        response.json(docs);
     });
-    // questionDB.findOnlyActived((err,result)=>{
-    //     console.log(result)
-    // });
 })
 
-route.post('/',(request,response) => {
-    console.log(request.body)
+route.post('/', (request, response) => {
     var question = request.body.question;
     var isActive = request.body.actived;
-    console.log("question is: " + question," isActive is: " + isActive);
-    questionCollection.insertMany({"problemStatement": question,"actived":isActive},(err)=>{
-        response.json(question + " " + isActive);
+
+    questionDB.insertQuestion(question, isActive, (result) => {
+        response.json(result);
     });
 });
 
-route.put('/:id/:actived',(request,response)=>{
+route.put('/:id/:actived', (request, response) => {
     var questionId = request.params.id;
     var isActive = request.params.actived;
     console.log("updating question with id: " + questionId + " and question's status will be: " + isActive);
-    questionCollection.findByIdAndUpdate(id,{"actived" : isActive});
+    questionCollection.findByIdAndUpdate(id, { "actived": isActive });
     response.send(questionId + isActive);
 })
 

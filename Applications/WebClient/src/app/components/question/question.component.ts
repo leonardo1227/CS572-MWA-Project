@@ -23,8 +23,6 @@ export class QuestionComponent implements OnInit {
   async submitForm() {
     this.http.post('http://localhost:1001/questions/', this.form.value).subscribe(
       result => {
-        console.log('hey')
-        console.log('result')
         console.log(result)
       }
     ) 

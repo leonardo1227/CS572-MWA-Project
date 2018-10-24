@@ -6,15 +6,11 @@
       </a>
     </span>
     <span class="fill-remaining-space"></span>
-    <span class="user">{{(user | async)?.name}}</span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="!(user | async)">
+    <span class="user" *ngIf="user.name" color="accent">{{user.name}}</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" [(disabled)]="!user.name" color="accent">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <a routerLink="update-password" mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span>Change password</span>
-      </a>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Logout</span>
@@ -24,28 +20,24 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="container">
-  <mat-sidenav #sidenav mode="side" [opened]="(user | async)" class="sidenav" fixedInViewport fixedTopGap="60">
+  <mat-sidenav #sidenav mode="side" [opened]="user.name" class="sidenav" fixedInViewport fixedTopGap="60">
     <mat-nav-list class='nav-menu'>
       <span>Exams</span>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="['/exams']">
+      <a mat-list-item [routerLink]="['/exam']">
         <mat-icon color="accent">list</mat-icon>
-        Exams
+        Applications
       </a>
-      <a mat-list-item [routerLink]="['/exams']">
-        <mat-icon color="accent">code</mat-icon>
-        Create exam
-      </a>
-      <div *ngIf="(user | async)?.role === 'ADMIN'">
+      <div *ngIf="(user)?.role === 'admin'">
         <span>Questions</span>
         <mat-divider></mat-divider>
         <a mat-list-item [routerLink]="['/questions']">
           <mat-icon color="accent">question_answer</mat-icon>
           Questions
         </a>
-        <a mat-list-item [routerLink]="['/questions/add']">
+        <a mat-list-item [routerLink]="['createQuestion']">
           <mat-icon color="accent">note_add</mat-icon>
-          Add question
+          Create question
         </a>
         <span>Users</span>
         <mat-divider></mat-divider>
@@ -53,14 +45,14 @@
           <mat-icon color="accent">supervisor_account</mat-icon>
           Users
         </a>
-        <a mat-list-item [routerLink]="['/users/add']">
+        <a mat-list-item [routerLink]="['createUser']">
           <mat-icon color="accent">person_add</mat-icon>
           Add user
         </a>
       </div>
     </mat-nav-list>
-  </mat-sidenav>as
-  
+  </mat-sidenav>
+
   <mat-sidenav-content class="content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
@@ -68,4 +60,5 @@
 
 <mat-toolbar class="footer">
   <span>Jey Guru Dev</span>
-</mat-toolbar><!--The content below is only a placeholder and can be replaced.-->
+</mat-toolbar>
+<!--The content below is only a placeholder and can be replaced.-->
