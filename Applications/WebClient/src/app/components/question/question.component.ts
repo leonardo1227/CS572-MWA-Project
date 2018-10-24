@@ -24,6 +24,7 @@ export class QuestionComponent implements OnInit {
     this.http.post('http://localhost:1001/questions/', this.form.value).subscribe(
       result => {
         console.log(result)
+        this.form.reset();
       }
     ) 
 }

@@ -21,7 +21,7 @@ schema.methods.getQuestionsForExam = (questionsNumber, callbackFunction) => {
     .distinct("_id", (err, result) => {
       let ids = [];
       while (ids.length < questionsNumber) {
-        let number = Math.floor(Math.random() * (result.length - 1)) + 1;
+        let number = Math.floor(Math.random() * result.length);
         let id = result[number];
         if (ids.indexOf(id) < 0) {
           ids.push(id);

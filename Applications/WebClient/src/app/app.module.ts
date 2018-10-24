@@ -23,6 +23,9 @@ import { AdminGuard } from "./guards/admin.guard";
 import { MainComponentService } from "./services/mainComponentCommunication";
 import { ExamGuard } from "./guards/exam.guard";
 import { QuestionsComponent } from './components/questions/questions.component';
+import { SendInvitationComponent } from './components/send-invitation/send-invitation.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
+import { ReviewExamComponent } from './components/review-exam/review-exam.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { QuestionsComponent } from './components/questions/questions.component';
     UsersComponent,
     LoginComponent,
     AnswerInvitationComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    SendInvitationComponent,
+    ApplicationsComponent,
+    ReviewExamComponent
   ],
   imports: [
     BrowserModule,

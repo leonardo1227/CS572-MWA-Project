@@ -82,7 +82,6 @@ invitationVerifier.subscribe(data => {
     result => {
       if (result.invitationStatus == "Sent") {
         data.exam = result;
-        // invitationStatusChanger.next(data);
         questionsGenerator.next(data);
       } else {
         data.data = { error: "Invitation no longer valid!" };
