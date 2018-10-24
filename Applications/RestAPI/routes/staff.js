@@ -33,7 +33,7 @@ route.post('/', (req, res) => {
         You can Sign In into the system with the below credentials:<br>
         Email: ${content.email} <br>
         Password: ${content.password}
-        <h2><a href="http://localhost:${process.env.SERVER_PORT}/login">Login</a></h2>
+        <h2><a href="http://localhost:${process.env.CLIENT_PORT}/login">Login</a></h2>
         <br>
         Please change your password soon as possible after you Signed In into the system`;
 
