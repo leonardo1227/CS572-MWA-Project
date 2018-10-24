@@ -16,6 +16,9 @@ import { QuestionComponent } from "./components/question/question.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { UsersComponent } from "./components/users/users.component";
+import { ErrorComponent } from './components/error/error.component';
+import { AdminGuard } from "./guards/admin.guard";
+import { MainComponentService } from "./services/mainComponentCommunication";
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { UsersComponent } from "./components/users/users.component";
     ExamComponent,
     UsersComponent,
     QuestionComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { UsersComponent } from "./components/users/users.component";
     BrowserAnimationsModule,
     MainMaterialModule
   ],
-  providers: [],
+  providers: [AdminGuard, MainComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

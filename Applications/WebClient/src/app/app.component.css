@@ -11,6 +11,8 @@
     align-items: center;
     justify-content: center;
     width: 200px;
+    background-color: #4a4a4a;
+    color: white;
   }
   
   .header {
@@ -18,7 +20,11 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: #b0b0b0;
+    background-color: #000;
+  }
+
+  .mat-list-item {
+    color: #eee
   }
   
   .content {
@@ -49,6 +55,8 @@
   .user {
     font-size: 1rem;
     font-weight: 300;
+    color:#ffd740;
+    font-weight: bold;
   }
   
   .logo a {

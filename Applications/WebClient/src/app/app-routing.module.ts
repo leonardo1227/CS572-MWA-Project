@@ -7,19 +7,23 @@ import { ExamComponent } from "./components/exam/exam.component";
 import { QuestionComponent } from "./components/question/question.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { UsersComponent } from "./components/users/users.component";
+import { ErrorComponent } from "./components/error/error.component";
+import { AdminGuard } from "./guards/admin.guard";
 
 const routes: Routes = [
-  { path: "staff", component: StaffComponent },
-  { path: 'createUser', component: CreateUserComponent},
-  { path: 'users', component: UsersComponent},
-  { path: "exam", component: ExamComponent },
-  { path: "createQuestion", component: QuestionComponent },
+  { path: "staff", component: StaffComponent, canActivate: [AdminGuard] },
+  { path: 'createUser', component: CreateUserComponent, canActivate: [AdminGuard] },
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
+  { path: "exam", component: ExamComponent},
+  { path: "createQuestion", component: QuestionComponent, canActivate: [AdminGuard]},
   { path: "login", component: LoginComponent },
-  { path: "home", component: AppComponent }
+  { path: "", component: AppComponent, canActivate: [AdminGuard]},
+  { path: "error", component: ErrorComponent },
+  { path: "**", redirectTo: 'error' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
