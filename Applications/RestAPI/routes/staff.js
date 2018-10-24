@@ -18,6 +18,15 @@ route.get('/', (req, res) => {
 
 route.post('/', (req, res) => {
     const content = req.body;
+    const reset = req.query.reset;
+    if (reset) {
+        userModel.reset(result => {
+            res.json(result);
+        })
+        return;
+    }
+
+
     let htmlbody = `<h3>Welcome ${content.name} </h3> 
         This is the Administration System of <strong>AEL CSExam System</strong>
         <br>
@@ -31,8 +40,17 @@ route.post('/', (req, res) => {
     email.sendEmail(content.email, "Welcome to AEL CSExam System", htmlbody);
     content.password = encryptation.crypter(content.password);
 
+
     userModel.createUser(content, result => {
         res.json({ success: 1 });
+    })
+});
+
+route.patch('/', (req, res) => {
+    const userId = req.body.id;
+    const value = req.body.value;
+    userModel.changeStatus(userId, value, result => {
+        res.json(result)
     })
 });
 

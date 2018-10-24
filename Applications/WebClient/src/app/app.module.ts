@@ -9,11 +9,12 @@ import { ProgressVisorComponent } from './components/progress-visor/progress-vis
 import { AceEditorModule } from 'ng2-ace-editor';
 import { AceEditorComponent } from './components/exam-editor/exam-editor.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { CreateStaffComponent } from './components/create-staff/create-staff.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainMaterialModule } from './modules/material.module';
 import { ExamComponent } from './components/exam/exam.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { ExamComponent } from './components/exam/exam.component';
     ProgressVisorComponent,
     AceEditorComponent,
     StaffComponent,
-    CreateStaffComponent,
-    ExamComponent
+    CreateUserComponent,
+    ExamComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
