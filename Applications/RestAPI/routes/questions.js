@@ -31,11 +31,12 @@ route.get('/active',(request,response) =>{
 })
 
 route.post('/',(request,response) => {
+    console.log(request.body)
     var question = request.body.question;
     var isActive = request.body.actived;
     console.log("question is: " + question," isActive is: " + isActive);
     questionCollection.insertMany({"problemStatement": question,"actived":isActive},(err)=>{
-        response.send(question + " " + isActive);
+        response.json(question + " " + isActive);
     });
 });
 

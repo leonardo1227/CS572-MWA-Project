@@ -1,0 +1,16 @@
+<mat-card class="card center">
+  <h1 class="centerContent">New User</h1>
+
+  <form [formGroup]='form' (ngSubmit)="submitForm()">
+    <mat-form-field class="full-width" >
+      <mat-label>Question Text</mat-label>
+      <textarea matInput placeholder="Question Text" name="question" formControlName="question" required></textarea>
+    </mat-form-field><br/>
+
+    <mat-slide-toggle  formControlName="actived">Active</mat-slide-toggle>
+    <br>
+    <div class="centerContent">
+      <button mat-raised-button type="submit" [disabled]="!form.valid" color="primary">Save</button>
+    </div>
+  </form>
+</mat-card>

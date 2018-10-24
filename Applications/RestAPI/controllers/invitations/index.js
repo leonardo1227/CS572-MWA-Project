@@ -42,11 +42,9 @@ invitationHashCreator.subscribe(data => {
 
 emailSender.subscribe(data => {
   let htmlbody = `<h3>This is the invitation to take the exam, click in the following link:</h3>
-              <a href="http://localhost:${
-                process.env.SERVER_PORT
-              }/invitations/answer?cod=${
-    data.invitationInfo.hash
-  }">Take the exam</a>`;
+              <a href="http://${process.env.SERVER_IP}:${
+    process.env.SERVER_PORT
+  }/invitations/answer?cod=${data.invitationInfo.hash}">Take the exam</a>`;
 
   email.sendEmail(
     data.invitationInfo.email,
