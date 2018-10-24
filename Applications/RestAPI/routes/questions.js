@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require("cors");
 const route = express.Router();
 const questionCollection = require('mongoose').model('question');
 const questionDB = require('../modules/dbconnection/models').question();
 route.use(express.json())
+route.use(cors());
 
 route.get('/', (request,response)=>{
     questionCollection.count().exec(function(err,count){
@@ -29,11 +31,12 @@ route.get('/active',(request,response) =>{
 })
 
 route.post('/',(request,response) => {
+    console.log(request.body)
     var question = request.body.question;
     var isActive = request.body.actived;
     console.log("question is: " + question," isActive is: " + isActive);
     questionCollection.insertMany({"problemStatement": question,"actived":isActive},(err)=>{
-        response.send(question + " " + isActive);
+        response.json(question + " " + isActive);
     });
 });
 

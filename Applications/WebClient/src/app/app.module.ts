@@ -13,6 +13,8 @@ import { CreateStaffComponent } from "./components/create-staff/create-staff.com
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MainMaterialModule } from "./modules/material.module";
+import { ExamComponent } from "./components/exam/exam.component";
+import { QuestionComponent } from "./components/question/question.component";
 import { LoginComponent } from "./components/login/login.component";
 
 @NgModule({
@@ -23,6 +25,8 @@ import { LoginComponent } from "./components/login/login.component";
     AceEditorComponent,
     StaffComponent,
     CreateStaffComponent,
+    ExamComponent,
+    QuestionComponent,
     LoginComponent
   ],
   imports: [
