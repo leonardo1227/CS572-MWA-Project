@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainMaterialModule } from './modules/material.module';
 import { ExamComponent } from './components/exam/exam.component';
 import { QuestionComponent } from './components/question/question.component';
+import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { QuestionComponent } from './components/question/question.component';
     StaffComponent,
     CreateStaffComponent,
     ExamComponent,
-    QuestionComponent
+    QuestionComponent,
+    QuestionEditorComponent
   ],
   imports: [
     BrowserModule,
