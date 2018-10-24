@@ -3,6 +3,7 @@ const route = express.Router();
 const userCollection = require('mongoose').model('user');
 const userModel = require('../modules/dbconnection/models').user()
 const encryptation = require("../modules/encryptation");
+const email = require("../modules/email");
 const cors = require("cors");
 route.use(express.json())
 route.use(cors());
@@ -17,14 +18,21 @@ route.get('/', (req, res) => {
 
 route.post('/', (req, res) => {
     const content = req.body;
-    console.log('------------------------------------------')
+    let htmlbody = `<h3>Welcome ${content.name} </h3> 
+        This is the Administration System of <strong>AEL CSExam System</strong>
+        <br>
+        You can Sign In into the system with the below credentials:<br>
+        Email: ${content.email} <br>
+        Password: ${content.password}
+        <h2><a href="http://localhost:${process.env.SERVER_PORT}/login">Login</a></h2>
+        <br>
+        Please change your password soon as possible after you Signed In into the system`;
 
+    email.sendEmail(content.email, "Welcome to AEL CSExam System", htmlbody);
     content.password = encryptation.crypter(content.password);
 
-    console.log(content)
     userModel.createUser(content, result => {
-        console.log('2222')
-        res.json({success:1});
+        res.json({ success: 1 });
     })
 });
 
