@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef, OnDestroy, OnInit, Injectable } from '@angular/core';
+import { Directive, HostListener, ElementRef, OnDestroy, OnInit, Injectable, Input } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http';
@@ -11,13 +11,12 @@ export class TrackChangesDirective implements OnDestroy, OnInit {
 
   private checkSubscription: Subscription;
   public snapshots: Array<object>
+  @Input() appId:string
+  @Input() examId:string
+  @Input() questionId:string
 
   constructor(private el: ElementRef, public http: HttpClient) {
     this.snapshots = new Array();
-  }
-
-  testM() {
-    console.log("retetinsss")
   }
 
   onChanges(value) {
@@ -32,7 +31,7 @@ export class TrackChangesDirective implements OnDestroy, OnInit {
     console.log(this.snapshots);
     console.log(this.snapshots.length);
     if (this.snapshots.length > 0) {
-      this.http.post('http://localhost:1001/exams/progress/1/1/1', this.snapshots).subscribe(
+      this.http.post(`http://localhost:1001/exams/progress/${this.appId}/${this.examId}/${this.questionId}`, this.snapshots).subscribe(
         result => {
           console.log('end...');
           //this.snapshots.length = 0;
@@ -46,6 +45,9 @@ export class TrackChangesDirective implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.checkSubscription = fromEvent(this.el.nativeElement, 'input').pipe(debounceTime(2000)).subscribe(e => this.autoSave())
+    console.log('appId' + this.appId)
+    console.log('examId' + this.examId)
+    console.log('questionId' + this.questionId)
   }
 
   ngOnDestroy(): void {

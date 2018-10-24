@@ -20,6 +20,6 @@ export class AdminGuard implements CanActivate {
         else 
             this.r.navigate(['error']) */
         
-        return  true;
+        return  false;
     }
 }

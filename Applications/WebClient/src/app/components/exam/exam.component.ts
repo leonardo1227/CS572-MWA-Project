@@ -10,15 +10,16 @@ export class ExamComponent implements OnInit {
   user = {}
 
   questions: object[];
+  appId: string;
+  examId: string;
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
     this.loadCredentials();
 
-    const appId = this.user['appId']
-    const examId = this.user['examId']
-    console.log(this.user)
-    this.http.get('http://localhost:1001/exams/' + appId + '/' + 1).subscribe(data => {
+    this.appId = this.user['appId']
+    this.examId = this.user['examId']
+    this.http.get('http://localhost:1001/exams/' + this.appId + '/' + this.examId).subscribe(data => {
       console.log(data)
       if (data['questions']) {
         this.questions = data['questions'];
@@ -33,6 +34,10 @@ export class ExamComponent implements OnInit {
       this.user['examId'] = sessionStorage.getItem('examId')
       this.user['appId'] = sessionStorage.getItem('applicationProcessId')
     }
+  }
+
+  submitExam() {
+
   }
 
 }
